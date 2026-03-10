@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-func evenNo(nums []int, wg *sync.WaitGroup, result *[]int) {
+func EvenNo(nums []int, wg *sync.WaitGroup, result *[]int) {
 	defer wg.Done()
 	for _, num := range nums {
 		if num%2 == 0 {
@@ -13,7 +13,7 @@ func evenNo(nums []int, wg *sync.WaitGroup, result *[]int) {
 		}
 	}
 }
-func oddNo(nums []int, wg *sync.WaitGroup, result *[]int) {
+func OddNo(nums []int, wg *sync.WaitGroup, result *[]int) {
 	defer wg.Done()
 	for _, num := range nums {
 		if num%2 != 0 {
@@ -21,15 +21,16 @@ func oddNo(nums []int, wg *sync.WaitGroup, result *[]int) {
 		}
 	}
 }
+
 func main() {
-	nums := []int{000, 00, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	var wg sync.WaitGroup
 	var evenResult []int
 	var oddResult []int
 
 	wg.Add(2)
-	go evenNo(nums, &wg, &evenResult)
-	go oddNo(nums, &wg, &oddResult)
+	go EvenNo(nums, &wg, &evenResult)
+	go OddNo(nums, &wg, &oddResult)
 	wg.Wait()
 	fmt.Println("Even Numbers:", evenResult)
 	fmt.Println("Odd Numbers:", oddResult)
