@@ -1,17 +1,20 @@
 package main
 
-const age int = 24
+import "fmt"
+
+const age int = 30
+const name string = "Pawan Kumar"
 
 func main() {
-	const pi = 3.14
 	const (
-		dob     string = "May 18, 1989"
-		message string = "data fetch successfully"
-		status  bool   = true
+		city      string = "Bangalore"
+		country   string = "India"
+		education string = "B.Tech"
 	)
-	println(pi)
-	println(age)
-	println(message)
-	println(status)
-	println(dob)
+
+	fmt.Println("This is my age: ", age)
+	fmt.Println("This is my name: ", name)
+	fmt.Println("This is my city: ", city)
+	fmt.Println("This is my country: ", country)
+	fmt.Println("This is my education: ", education)
 }
