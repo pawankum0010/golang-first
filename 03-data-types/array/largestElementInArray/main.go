@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func findLargestElement(arr []int) int {
 	max := math.MinInt64
@@ -19,5 +22,5 @@ func main() {
 		return
 	}
 	largest := findLargestElement(num[:])
-	println("Largest element in array is ", largest)
+	fmt.Println("Largest element in the array is:", largest)
 }
