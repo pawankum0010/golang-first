@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// Map is a built-in data structure that stores data as a collection of
+// unordered key-value pairs, where every key is unique and maps to exactly one value
 func main() {
 	studentGrades := make(map[string]int)
 
