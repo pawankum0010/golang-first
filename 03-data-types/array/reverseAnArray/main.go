@@ -1,16 +1,12 @@
 package main
 
-import (
-	"fmt" // Import the fmt package for correct printing
-)
+import "fmt"
 
-// reverseArray reverses a slice of integers in place.
-func reverseArray(arr []int) []int {
+func reverseAnArray(arr []int) []int {
 	start := 0
 	end := len(arr) - 1
 	for start < end {
-		// Swap elements using Go's concise syntax
-		arr[start], arr[end] = arr[end], arr[start]
+		arr[start], arr[end] = arr[end], arr[start] //Swap element using concise syntax
 		start++
 		end--
 	}
@@ -19,10 +15,6 @@ func reverseArray(arr []int) []int {
 
 func main() {
 	num := []int{10, 20, 30, 40, 50}
-
-	// The slice is reversed in place by the function
-	reversed := reverseArray(num)
-
-	// 💡 Use fmt.Println to print the slice content correctly
-	fmt.Println("Reversed array is ", reversed)
+	reversed := reverseAnArray(num)
+	fmt.Println(reversed)
 }
