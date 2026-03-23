@@ -3,28 +3,17 @@ package main
 import "fmt"
 
 func main() {
-	// fmt.Println("I am learning array in golang")
-	// var name [25]string
-	// name[0] = "Pawan"
-	// name[1] = "Kumar"
-	// name[2] = "Singh"
-	// name[3] = "Gupta"
-	// name[4] = "Radhe Krishna"
-	// fmt.Println(name)
-
-	// var numbers = [5]int{1, 2, 3, 4, 5}
-	// fmt.Println("Numbers are ", numbers)
-	// fmt.Println("Length of array is ", len(numbers))
-	// fmt.Println("Value at index 3 is ", name[3])
-
-	// var price [10]string
-	// fmt.Println("Price is ", price)
-	var name [30]string
-	name[0] = "Pawan"
-	name[1] = "Kumar"
-	name[2] = "Singh"
-	name[3] = "Gupta"
-	name[4] = "Radhe Krishna"
+	var name [2]string
+	name[0] = "John"
+	name[1] = "Doe"
 	fmt.Println(name)
+
+	var num [5]int
+	num[0] = 10
+	num[1] = 20
+	num[2] = 30
+	num[3] = 40
+	num[4] = 50
+	fmt.Println(num)
 
 }
