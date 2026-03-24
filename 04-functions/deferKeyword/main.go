@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// In Go, the defer keyword schedules a function call to be executed immediately
+// After the surrounding function returns, following a Last-In, First-Out (LIFO) order.
 func add(a, b int) int {
 	return a + b
 }

@@ -1,39 +1,65 @@
 package main
 
-import "fmt"
-
 type Person struct {
-	Name string
-	Age  int
+	Name   string
+	Age    int
+	Gender string
+}
+type Address struct {
+	Person
+	City    string
+	Country string
 }
 type Employee struct {
-	Person
-	EmployeeID int
+	Address
+	Company     string
+	Designation string
+	Department  string
 }
 type Salary struct {
 	Employee
-	BasicPay float64
-}
-
-func (e Employee) GetDetails() {
-	fmt.Println(e.Age, " ", e.EmployeeID, " ", e.Name)
+	Basic  float64
+	HRA    float64
+	DA     float64
+	Tax    float64
+	NetPay float64
 }
 
 func main() {
 	salary := Salary{
 		Employee: Employee{
-			Person: Person{
-				Name: "John Doe",
-				Age:  30,
+			Address: Address{
+				Person: Person{
+					Name:   "Pawan Kumar",
+					Age:    30,
+					Gender: "Male",
+				},
+				City:    "New Delhi",
+				Country: "India",
 			},
-			EmployeeID: 12345,
+			Company:     "Tech Company",
+			Designation: "Software Engineer",
+			Department:  "Development",
 		},
-		BasicPay: 50000.0,
+		Basic:  50000,
+		HRA:    20000,
+		DA:     10000,
+		Tax:    15000,
+		NetPay: 65000,
 	}
 
-	fmt.Println("Name:", salary.Name)
-	fmt.Println("Age:", salary.Age)
-	fmt.Println("Employee ID:", salary.EmployeeID)
-	fmt.Println("Basic Pay:", salary.BasicPay)
+	println("Name:", salary.Name)
+	println("Age:", salary.Age)
+	println("Gender:", salary.Gender)
+	println("City:", salary.City)
+	println("Country:", salary.Country)
+	println("Company:", salary.Company)
+	println("Designation:", salary.Designation)
+	println("Department:", salary.Department)
+	println("Basic Salary:", salary.Basic)
+	println("HRA:", salary.HRA)
+	println("DA:", salary.DA)
+	println("Tax:", salary.Tax)
+	println("Net Pay:", salary.NetPay)
 
 }
