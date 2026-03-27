@@ -22,6 +22,8 @@ package main
 // - Range: for value := range channel (iterate until channel is closed)
 //
 // ============================================================================
+// make(chan int, 0) - creates an unbuffered channel of type int
+// make(chan string, 3) - creates a buffered channel of type string with capacity 3
 
 import (
 	"fmt"
@@ -37,11 +39,11 @@ import (
 // The range loop continues until the channel is closed.
 //
 // HOW IT WORKS:
-// - Goroutine waits for data on the channel
-// - Main function sends random numbers to the channel
-// - Goroutine receives and processes each number
-// - Synchronization happens automatically: sender waits for receiver, 
-//   and receiver waits for sender
+//   - Goroutine waits for data on the channel
+//   - Main function sends random numbers to the channel
+//   - Goroutine receives and processes each number
+//   - Synchronization happens automatically: sender waits for receiver,
+//     and receiver waits for sender
 func processNum(numchan chan int) {
 	for num := range numchan {
 		fmt.Println("Processing number...", num)

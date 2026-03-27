@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// make(map[string]string) - creates a map with string keys and string values
+// make(map[string]int) - creates a map with string keys and integer values
 // Map is a built-in data structure that stores data as a collection of
 // unordered key-value pairs, where every key is unique and maps to exactly one value
 func main() {
