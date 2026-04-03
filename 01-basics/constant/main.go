@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 const age int = 30
-const name string = "Pawan Kumar"
+const name string = "Pawan Kumar" //Pawan
 
 func main() {
 	const (
