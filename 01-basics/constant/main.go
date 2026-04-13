@@ -17,4 +17,5 @@ func main() {
 	fmt.Println("This is my city: ", city)
 	fmt.Println("This is my country: ", country)
 	fmt.Println("This is my education: ", education)
+	fmt.Println("This is my age: ", age)
 }
