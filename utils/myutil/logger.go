@@ -19,7 +19,16 @@ func NewExecutionLogger() (*log.Logger, func(), error) {
 
 	file, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o644)
 	if err != nil {
-		return nil, nil, err
+		currentDir, cwdErr := os.Getwd()
+		if cwdErr != nil {
+			return nil, nil, err
+		}
+
+		fallbackLogFilePath := filepath.Join(currentDir, fileName)
+		file, err = os.OpenFile(fallbackLogFilePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o644)
+		if err != nil {
+			return nil, nil, err
+		}
 	}
 
 	logger := log.New(file, "", log.Ldate|log.Ltime|log.Lmicroseconds)
