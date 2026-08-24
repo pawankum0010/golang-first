@@ -37,7 +37,7 @@
                     "data_source_name": "Ascent Metrics",
                     "name": "Namespace, App distribution (EVENTS) [24h]",
                     "options": {
-                        "description": "Events ingested per namespace in the last 24 hours, split by app",
+                        "description": "Events ingested per namespace in the last 24 hours, split by app; the asmplus namespace is excluded because it emits one app per synthetic check",
                         "order": 2,
                         "plot": {
                             "errorColumn": "",
@@ -51,7 +51,7 @@
                         },
                         "upperLimit": ""
                     },
-                    "query": "round(logiq:namespace_app_count_daily:increase,1)",
+                    "query": "round(logiq:namespace_app_count_daily:increase{exported_namespace!=\"asmplus\"},1)",
                     "schema": "logiq:namespace_app_count_daily:increase"
                 },
                 {
@@ -81,7 +81,7 @@
                     "data_source_name": "Ascent Metrics",
                     "name": "Namespace, App distribution (GB) [24h]",
                     "options": {
-                        "description": "Data volume in GB ingested per namespace in the last 24 hours, split by app",
+                        "description": "Data volume in GB ingested per namespace in the last 24 hours, split by app; the asmplus namespace is excluded because it emits one app per synthetic check",
                         "order": 4,
                         "plot": {
                             "errorColumn": "",
@@ -95,7 +95,7 @@
                         },
                         "upperLimit": ""
                     },
-                    "query": "round(logiq:namespace_app_bytes_daily:increase/1000000000,0.001)",
+                    "query": "round(logiq:namespace_app_bytes_daily:increase{exported_namespace!=\"asmplus\"}/1000000000,0.001)",
                     "schema": "logiq:namespace_app_bytes_daily:increase"
                 },
                 {
