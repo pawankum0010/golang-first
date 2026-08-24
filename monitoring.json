@@ -1,0 +1,260 @@
+{
+    "header": {
+        "dateTimeRange": true,
+        "dropdowns": [],
+        "data_source_type": "apica_ascent_prometheus",
+        "title": "Apica Cluster Monitoring"
+    },
+    "tabs": [
+        {
+            "key": "Overview",
+            "order": "1",
+            "title": "Overview",
+            "type": "metrics",
+            "queriesList": [
+                {
+                    "chart_type": "line",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Ingest Memory Usage (Go Heap)",
+                    "options": {
+                        "description": "Heap memory allocated by the Go runtime (GB) for ingest pods",
+                        "order": 1,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "pod",
+                            "x": "timestamp",
+                            "xLabel": "Timestamp",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "GB"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "(round(go_memstats_heap_alloc_bytes{pod=~\"logiq-flash-\\\\d{1,3}\"}/1000000000,0.1))&duration=1h&step=5m",
+                    "schema": "go_memstats_heap_alloc_bytes"
+                },
+                {
+                    "chart_type": "bar",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Back Pressure Counter",
+                    "options": {
+                        "description": "Current flush backlog depth per pod: records batched but not yet flushed",
+                        "order": 2,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "",
+                            "x": "pod",
+                            "xLabel": "Pod",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "Pending records"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "logiq_back_pressure_counter",
+                    "schema": "logiq_back_pressure_counter"
+                },
+                {
+                    "chart_type": "bar",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Mover Operation Count",
+                    "options": {
+                        "description": "Mover operations per pod over the last 5 minutes, split by operation type",
+                        "order": 3,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "operation",
+                            "x": "pod",
+                            "xLabel": "Pod",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "Ops / 5m"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(sum by (pod, operation) (increase(logiq_mover_count[5m])),1)",
+                    "schema": "logiq_mover_count"
+                },
+                {
+                    "chart_type": "line",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Data Ingest Rate (GB/h)",
+                    "options": {
+                        "description": "Total data received across all ingest pods (GB per hour)",
+                        "order": 4,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "",
+                            "x": "timestamp",
+                            "xLabel": "Timestamp",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "GB / hour"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(sum(increase(logiq_data_received_bytes[5m]))/1000000000*12,0.01)&duration=1h&step=5m",
+                    "schema": "logiq_data_received_bytes"
+                },
+                {
+                    "chart_type": "bar",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Per-Pod Ingest Rate (GB/h)",
+                    "options": {
+                        "description": "Data received per ingest pod (GB/h), summed across all ingest protocols",
+                        "order": 5,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "",
+                            "x": "pod",
+                            "xLabel": "Pod",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "GB / hour"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(sum by (pod)(increase(logiq_data_received_bytes[5m]))*12/1000000000,0.01)",
+                    "schema": "logiq_data_received_bytes"
+                },
+                {
+                    "chart_type": "line",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "API Memory Usage (Go Heap)",
+                    "options": {
+                        "description": "Heap memory allocated by the Go runtime (GB) for API/ML pods (logiq-flash-ml-*)",
+                        "order": 6,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "pod",
+                            "x": "timestamp",
+                            "xLabel": "Timestamp",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "GB"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(go_memstats_heap_alloc_bytes{pod=~\"logiq-flash-ml-\\\\d{1,3}\"}/1000000000,0.1)&duration=1h&step=5m",
+                    "schema": "go_memstats_heap_alloc_bytes"
+                },
+                {
+                    "chart_type": "bar",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Disk Space Available (Ingest)",
+                    "options": {
+                        "description": "Free disk space per ingest pod as a percentage of that pod's total volume",
+                        "order": 7,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "",
+                            "x": "pod",
+                            "xLabel": "Pod",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "% free"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(100 * sum by (pod) (logiq_file_sizes_bytes{pod=~\"logiq-flash-\\\\d{1,3}\",fileName=\"free\"}) / sum by (pod) (logiq_file_sizes_bytes{pod=~\"logiq-flash-\\\\d{1,3}\",fileName=\"all\"}),0.01)",
+                    "schema": "logiq_file_sizes_bytes"
+                },
+                {
+                    "chart_type": "line",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Messages Rate per Namespace",
+                    "options": {
+                        "description": "Message ingestion rate per tenant namespace (msg/sec), summed over app and severity",
+                        "order": 8,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "exported_namespace",
+                            "x": "timestamp",
+                            "xLabel": "Timestamp",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "msg / sec"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(sum by (exported_namespace) (rate(logiq_namespace_app_message_count[5m])),1)&duration=1h&step=5m",
+                    "schema": "logiq_namespace_app_message_count"
+                },
+                {
+                    "chart_type": "bar",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Batch Size (5m Avg)",
+                    "options": {
+                        "description": "Average number of messages per JSON batch, per pod, over the last 5 minutes",
+                        "order": 9,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "",
+                            "x": "pod",
+                            "xLabel": "Pod",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "Messages / batch"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(sum by (pod) (increase(logiq_json_batch_size_count_sum[5m])) / sum by (pod) (increase(logiq_json_batch_size_count_count[5m])),1)",
+                    "schema": "logiq_json_batch_size_count_sum"
+                },
+                {
+                    "chart_type": "line",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Ingest DB File Count",
+                    "options": {
+                        "description": "Number of ingest database files held per pod",
+                        "order": 10,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "pod",
+                            "x": "timestamp",
+                            "xLabel": "Timestamp",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "Files"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "query=logiq_ingestdb_files_count&duration=1h&step=5m",
+                    "schema": "logiq_ingestdb_files_count"
+                },
+                {
+                    "chart_type": "line",
+                    "data_source_name": "Ascent Metrics",
+                    "name": "Disk Free % (Per Pod)",
+                    "options": {
+                        "description": "Free disk percentage per ingest pod over time, computed as free / all",
+                        "order": 11,
+                        "plot": {
+                            "errorColumn": "",
+                            "groupBy": "pod",
+                            "x": "timestamp",
+                            "xLabel": "Timestamp",
+                            "y": [
+                                "value"
+                            ],
+                            "yLabel": "% free"
+                        },
+                        "upperLimit": ""
+                    },
+                    "query": "round(100 * sum by (pod) (logiq_file_sizes_bytes{pod=~\"logiq-flash-\\\\d{1,3}\",fileName=\"free\"}) / sum by (pod) (logiq_file_sizes_bytes{pod=~\"logiq-flash-\\\\d{1,3}\",fileName=\"all\"}),0.01)&duration=1h&step=5m",
+                    "schema": "logiq_file_sizes_bytes"
+                }
+            ]
+        }
+    ]
+}
