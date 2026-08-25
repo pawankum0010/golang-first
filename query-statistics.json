@@ -12,7 +12,6 @@
             "queriesList": [
                 {
                     "chart_type": "Table",
-                    "data_source_name": "Flash",
                     "name": "Queries per User (15d)",
                     "options": {
                         "description": "Number of queries run by each user in the last 15 days, most active first",
@@ -34,7 +33,6 @@
                 },
                 {
                     "chart_type": "Table",
-                    "data_source_name": "Flash",
                     "name": "Query history (15d)",
                     "options": {
                         "description": "Most recent 500 queries from the last 15 days, newest first",
@@ -56,7 +54,6 @@
                 },
                 {
                     "chart_type": "counter",
-                    "data_source_name": "Flash",
                     "name": "Query count (15d)",
                     "options": {
                         "description": "Total number of queries run in the last 15 days",
@@ -79,7 +76,6 @@
                 },
                 {
                     "chart_type": "bar",
-                    "data_source_name": "Flash",
                     "name": "Query search range (15d)",
                     "options": {
                         "description": "How far back users search: Search and AdvanceSearch queries in the last 15 days, bucketed by the length of the time range searched",
@@ -101,7 +97,6 @@
                 },
                 {
                     "chart_type": "bar",
-                    "data_source_name": "Flash",
                     "name": "TTFR (Seconds) (15d)",
                     "options": {
                         "description": "Distribution of time-to-first-record in seconds over the last 15 days; queries that never returned a record are excluded",
@@ -123,7 +118,6 @@
                 },
                 {
                     "chart_type": "bar",
-                    "data_source_name": "Flash",
                     "name": "TTFR by Request Type (15d)",
                     "options": {
                         "description": "Time-to-first-record distribution over the last 15 days, split by request type; panel 5 is the same data without the breakdown",
